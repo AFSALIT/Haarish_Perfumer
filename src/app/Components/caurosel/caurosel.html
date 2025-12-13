@@ -1,0 +1,46 @@
+
+<!-- carousel.component.html -->
+<div class="carousel-container">
+  <div class="carousel">
+    <div class="carousel-inner" #carouselInner>
+      
+      <!-- Slide 1: Floral Collection -->
+      <div class="carousel-item" *ngFor="let slide of slides; let i = index" [class.active]="i === currentIndex">
+        <img [src]="slide.imageUrl" alt="{{slide.category}} Collection" loading="lazy">
+        
+        <div class="carousel-overlay">
+          <div class="carousel-content">
+            <div class="carousel-category">{{slide.category}}</div>
+            <h2 class="carousel-item-title">{{slide.title}}</h2>
+            <p class="carousel-description">{{slide.description}}</p>
+            <a href="#explore" class="carousel-btn">Explore Collection</a>
+          </div>
+        </div>
+      </div>
+      
+
+    </div>
+    
+    <!-- Navigation Arrows -->
+    <button class="carousel-nav prev" (click)="prevSlide()">
+      <svg fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+      </svg>
+    </button>
+    <button class="carousel-nav next" (click)="nextSlide()">
+      <svg fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+      </svg>
+    </button>
+    
+    <!-- Dots Indicator -->
+    <div class="carousel-dots">
+      <button 
+        *ngFor="let slide of slides; let i = index" 
+        class="carousel-dot" 
+        [class.active]="i === currentIndex"
+        (click)="currentIndex = i; updateCarousel()">
+      </button>
+    </div>
+  </div>
+</div>

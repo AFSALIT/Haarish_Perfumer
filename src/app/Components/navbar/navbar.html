@@ -1,7 +1,84 @@
-<h1>Welocm to Haarish Perfumes</h1>
-<nav>
-  <a href="/home">Home</a>
-  <a href="/products">Products</a>
-  <a href="/about">About Us</a>
-  <a href="/contact">Contact</a>
+<!-- navbar.component.html -->
+<nav class="navbar">
+  <div class="nav-container">
+    <!-- Logo -->
+    <a href="#" class="logo">
+      <div class="logo-icon"></div>
+      <div class="logo-text">
+        <span class="logo-brand">HAARISH</span>
+        <span class="logo-tagline">Perfumery</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <ul class="nav-menu" *ngIf="isDesktop">
+      <li class="dropdown" (mouseenter)="openDropdown('collections')" (mouseleave)="closeDropdown()">
+        <a href="#collections" class="nav-link">Collections</a>
+        <div class="dropdown-content" *ngIf="activeDropdown === 'collections'">
+          <a href="#women" class="nav-link">Women's Fragrances</a>
+          <a href="#men" class="nav-link">Men's Fragrances</a>
+          <a href="#unisex" class="nav-link">Unisex</a>
+          <a href="#niche" class="nav-link">Niche Perfumes</a>
+        </div>
+      </li>
+      <li><a href="#brands" class="nav-link">Brands</a></li>
+      <li><a href="#new" class="nav-link special">New Arrivals</a></li>
+      <li><a href="#bestsellers" class="nav-link">Bestsellers</a></li>
+      <li><a href="#offers" class="nav-link special">Offers</a></li>
+      <li><a href="#discover" class="nav-link">Discover</a></li>
+    </ul>
+
+    <!-- Action Buttons (Desktop) -->
+    <div class="nav-actions" *ngIf="isDesktop">
+      <button class="icon-btn" title="Search"><svg fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+        </svg></button>
+      <button class="icon-btn" title="Account"><svg fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+        </svg></button>
+      <button class="icon-btn" title="Shopping Cart" (click)="onCartClick()"><svg fill="currentColor" viewBox="0 0 20 20">
+          <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+        </svg>
+        <span class="cart-count">8</span>
+      </button>
+      <button class="btn-primary">Sign In</button>
+    </div>
+
+    <!-- Mobile Hamburger -->
+    <div class="toggle" *ngIf="!isDesktop">
+
+      <img src="/icon/menu.svg" alt="Menu Button" class="menu-icon" (click)="toggleMobileMenu()" *ngIf="!shownav">
+      <img src="/icon/x.svg" alt="Close Menu" class="menu-icon" (click)="toggleMobileMenu()" *ngIf="shownav">
+    </div>
+  </div>
 </nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" [class.active]="shownav">
+  <ul class="nav-menu">
+    <li class="dropdown">
+      <a href="#collections" class="nav-link" (click)="toggleMobileDropdown('collections')">
+        Collections
+        <span class="dropdown-arrow">{{ mobileDropdowns['collections'] ? '↑' : '↓' }}</span>
+      </a>
+      <div class="dropdown-content" *ngIf="mobileDropdowns['collections']">
+        <a href="#women" class="nav-link" (click)="closeMobileMenu()">Women's Fragrances</a>
+        <a href="#men" class="nav-link" (click)="closeMobileMenu()">Men's Fragrances</a>
+        <a href="#unisex" class="nav-link" (click)="closeMobileMenu()">Unisex</a>
+        <a href="#niche" class="nav-link" (click)="closeMobileMenu()">Niche Perfumes</a>
+      </div>
+    </li>
+    <li><a href="#brands" class="nav-link" (click)="closeMobileMenu()">Brands</a></li>
+    <li><a href="#new" class="nav-link" (click)="closeMobileMenu()">New Arrivals</a></li>
+    <li><a href="#bestsellers" class="nav-link" (click)="closeMobileMenu()">Bestsellers</a></li>
+    <li><a href="#offers" class="nav-link" (click)="closeMobileMenu()">Offers</a></li>
+    <li><a href="#discover" class="nav-link" (click)="closeMobileMenu()">Discover</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-primary" (click)="closeMobileMenu()">Sign In</button>
+    <!-- Mobile actions can be added here if needed -->
+  </div>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" [class.active]="shownav" (click)="closeMobileMenu()"></div>
