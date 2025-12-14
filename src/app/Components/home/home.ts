@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Navbar } from '../navbar/navbar';
 import { Caurosel } from '../caurosel/caurosel';
+import { Footer } from "../footer/footer";
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule,Navbar,Caurosel],
+  imports: [CommonModule, Navbar, Caurosel, Footer],
   templateUrl: './home.html',
-  styleUrl: './home.css',
+
+  styleUrls: ['./home.css'],
 })
 export class Home {
   showtext: boolean = false;

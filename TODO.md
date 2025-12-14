@@ -1,31 +1,39 @@
+# TODO: Fix SSR Error and Page Alignment Issues
 
-# Fix SSR Document Error in Navbar Component
+## Issues Identified:
+1. **SSR Error**: Footer component accesses `document` during server-side rendering
+2. **Template Structure**: footer.html contains complete HTML document (incorrect for component)
+3. **Modal Functions**: Global onclick handlers instead of component methods
+4. **Page Alignment**: Need to ensure proper spacing and layout
 
-## Problem
-The navbar component uses `document` directly, causing "ReferenceError: document is not defined" during server-side rendering (SSR).
-
-## Issues Identified
-1. `document.querySelectorAll('.dropdown')` and `document.querySelectorAll('.nav-link')`
-2. `document.body.style.overflow` manipulation
-3. `document.querySelector('.icon-btn[title="Shopping Cart"]')`
-4. `document.querySelector('.navbar')` 
-5. `window.pageYOffset` without browser checks
-
-## Solution Plan
-1. Add `isPlatformBrowser` import and inject `PLATFORM_ID`
-2. Replace direct document queries with ViewChild references where possible
-3. Use Angular's Renderer2 for safe DOM manipulation
-4. Add browser checks for window and document access
-5. Update component logic to handle SSR properly
+## Plan:
 
 
-## Implementation Steps
-- [x] Import required Angular modules (isPlatformBrowser, PLATFORM_ID)
-- [x] Add platform detection to constructor
-- [x] Replace document.querySelectorAll calls with proper element references
-- [x] Use Renderer2 for body style manipulation with browser checks
-- [x] Add browser checks for window object access
-- [x] Test the component in both browser and SSR environments
+### Step 1: Fix Footer Component SSR Issues
+- [x] Add SSR protection using `isPlatformBrowser` check
+- [x] Move DOM manipulations to browser-only lifecycle hooks
+- [x] Fix modal function calls to use component methods
+- [x] Remove complete HTML document structure from footer.html
 
-## Files Edited
-- `/Users/mac/Desktop/haarish_perfume/src/app/Components/navbar/navbar.ts` - ✅ Completed
+### Step 2: Fix Template Structure
+- [x] Convert footer.html to proper Angular component template
+- [x] Remove DOCTYPE, head, body tags
+- [x] Update modal onclick handlers to use component methods
+- [x] Ensure proper component template syntax
+
+
+### Step 3: Review and Fix Page Alignment
+- [x] Check CSS for navbar, carousel, and footer alignment
+- [x] Ensure proper spacing between components
+- [x] Fix carousel positioning from fixed to relative
+- [x] Create proper layout CSS for home component
+- [x] Remove conflicting body styles from components
+
+### Step 4: Test SSR Compatibility
+- [ ] Verify all components use SSR-safe patterns
+- [ ] Test both server-side and client-side rendering
+
+## Expected Outcome:
+- No SSR errors when running the application
+- Proper page alignment between navbar, carousel, and footer
+- Consistent SSR-safe code patterns across all components
